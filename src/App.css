@@ -36,3 +36,86 @@
     transform: rotate(360deg);
   }
 }
+
+.main-container {
+    max-width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+div {
+    display: block;
+}
+.body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+}
+.pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.shiny-input-container:not(.shiny-input-container-inline) {
+  width: 300px;
+  max-width: 100%;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+/* 
+@media (min-width: 768px)
+.col-sm-offset-1 {
+    margin-left: 8.33333333%;
+}
+@media (min-width: 768px)
+.col-sm-5 {
+    width: 41.66666667%;
+} */
+label {
+  /* display: inline-block; */
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+label {
+  cursor: default;
+}
+.shiny-input-checkboxgroup label ~ .shiny-options-group, .shiny-input-radiogroup label ~ .shiny-options-group {
+  margin-top: -10px;
+}
+div {
+  display: block;
+}
+.col-sm-6
+{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.RowBorder{
+  border-top: 1px dashed black;
+  width: 100%
+}
