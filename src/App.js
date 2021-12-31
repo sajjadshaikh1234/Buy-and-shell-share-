@@ -1,11 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 import Shares from './Component/Shares';
+import Increase from './Component/Increase';
+
 
 function App() {
+
   return (
     <div className="App">
-     <Shares />
+      {/* <Shares /> */}
+      <Increase />
     </div>
   );
 }

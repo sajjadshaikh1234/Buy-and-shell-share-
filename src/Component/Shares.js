@@ -49,11 +49,11 @@ const Shares = () => {
             setInputvalue(parseInt(current))
             setBidprice(parseInt(bidPrice))
 
-            if (parseInt(pre) >= parseInt(current)) {
+            if (parseInt(pre) <= parseInt(current)) {
                 setBidprice(parseInt(bidPrice) - parseInt(current) + parseInt(pre) - 1)
             }
             else {
-                setBidprice(parseInt(bidPrice) + parseInt(current) - 1)
+                setBidprice(parseInt(bidPrice)+parseInt(current)-1)
             }
         })
     }
@@ -67,14 +67,15 @@ const Shares = () => {
             setInputvalue(parseInt(data))
             setShervalue(parseInt(shervalue))
 
-            
             if (parseInt(prev) <= parseInt(data)) {
-                if (currentRadioValue === "BUY") {
-                    // setShervalue(parseInt(shervalue))
-                    setShervalue(parseInt(shervalue) - parseInt(data) + parseInt(prev))
-                }
-                else {
-                    changeprice(data)
+                {
+                    if (currentRadioValue === "BUY") {
+                        // setShervalue(parseInt(shervalue))
+                        setShervalue(parseInt(shervalue) - parseInt(data) + parseInt(prev))
+                    }
+                    else {
+                        changeprice(data)
+                    }
                 }
             }
             else {
@@ -82,11 +83,12 @@ const Shares = () => {
             }
         })
     }
-    // const[data,setData] = useState()
+    //const[data,setData] = useState()
 
-    //     const changeValue = () => {
+    //const changeValue = () => {
 
-    //     }
+    //}
+
     const [currentRadioValue, setCurrentRadioValue] = useState("BUY")
     const handleRadioChange = (e) => {
         setCurrentRadioValue(e.target.value);
@@ -176,7 +178,7 @@ const Shares = () => {
                 <div>
                     <table>
                         <tr>
-                            <th> </th>
+                            <th>BidPrice </th>
                             <th>Price</th>
                             {/* <th> Ask Size</th> */}
 
