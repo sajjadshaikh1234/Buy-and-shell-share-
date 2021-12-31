@@ -1,15 +1,17 @@
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import Shares from './Component/Shares';
 import Increase from './Component/Increase';
+import Signin from './Signin';
 
 
 function App() {
 
   return (
-    <div className="App">
-      {/* <Shares /> */}
-      <Increase />
+    <div>
+      <Shares />
+      {/* <Increase /> */}
+      <Signin />
     </div>
   );
 }

@@ -1,14 +1,19 @@
-// import { INCREAMENT, DECREAMENT } from '../Constant'
+// import { INCREAMENT, DECREAMENT , SIGNIN} from '../Constant'
 
-const initialstate = 0
+const initialstate = {
+   userData:{}
+}
 
-const changevalue = (state = initialstate, action) => {
+function changevalue(state = initialstate, action)  {
     switch (action.type) {
-        case "INCREAMENT":
-            return state + action.payload;
-        case "DECREAMENT" :
-            return state - action.payload;
-            default : return state;
+        case "SIGNIN":
+            return {
+                ...state,
+                userData: action.payload,
+            } 
+        
+            default: return  state;
+               
     }
 }
 

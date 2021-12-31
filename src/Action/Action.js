@@ -1,20 +1,25 @@
 import Constant from "../Constant"
 
-export const increasenumber = (number) => 
-{
-    return{
-        type : "INCREAMENT",
-        payload : number
-    }
+// export const increasenumber = (number) => 
+// {
+//     return{
+//         type : "INCREAMENT",
+//         payload : number
+//     }
    
-}
+// }
 
-export const decreasenumber = (numbers) => {
+// export const decreasenumber = (numbers) => {
+//     return{
+//         type : "DECREAMENT",
+//         payload : numbers
+//     }
+// }
+
+
+export const signin = (data) => {
     return{
-        type : "DECREAMENT",
-        payload : numbers
+        type : "SIGNIN",
+        payload : data
     }
 }
-
-
-
