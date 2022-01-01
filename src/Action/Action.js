@@ -17,9 +17,16 @@ import Constant from "../Constant"
 // }
 
 
-export const signin = (data) => {
+// export const signin = (data) => {
+//     return{
+//         type : "SIGNIN",
+//         payload : data
+//     }
+// }
+export const regis = (data) => {
     return{
-        type : "SIGNIN",
+        type : "REGISTER",
         payload : data
     }
 }
+

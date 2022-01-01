@@ -14,7 +14,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { convertLength } from '@mui/material/styles/cssUtils';
 import { useDispatch, useSelector } from "react-redux";
-import {increasenumber,decreasenumber,signin} from './Action/Action'
+import { increasenumber, decreasenumber, signin } from './Action/Action'
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -36,23 +37,35 @@ export default function SignIn() {
   const [password, setPassword] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
   const [error, setError] = useState("");
-   const selector = useSelector((state) => state.changevalue) 
-   const dispatch = useDispatch()
+  const selector = useSelector((state) => state.changevalue)
+  console.log("selector",selector)
+  // const dispatch = useDispatch()
+  const navigate = useNavigate()
   const changehandler = (e) => {
     e.preventDefault();
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      const ps = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    const ps = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     // console.log("re",re)
     if (!email.match(re)) {
       setErrorMessage({ field: "email", msg: "not valid email" })
-    } else if (!password.match(ps)) {
+    } 
+     if (!password.match(ps)) {
       setError({ field: "password", msg: "not valid password" })
-     
     }
-    dispatch(signin({email,password}))
-  
-  //  dispatch(decreasenumber())
+
+    // dispatch(signin({ email, password }))
+
+    //  dispatch(decreasenumber())
+    if(selector.userData.email === email, selector.userData.password === password ) {
+      console.log("....",selector.userData.email)
+      console.log("......",selector.userData.password)
+      navigate("/")
+    }
+
+
+
+
   }
 
   return (
@@ -87,6 +100,7 @@ export default function SignIn() {
               autoFocus
               error={errorMessage.field === "email"}
               helperText={errorMessage.msg}
+
             />
             <TextField
               margin="normal"
@@ -101,10 +115,12 @@ export default function SignIn() {
               errors={error.field === "password"}
               helperText={error.msg}
               autoComplete="current-password"
+
             />
-            {
-              (password.length <= 7) ? <p style={{color:"red"}}>password must be 7 charecter </p> : null
-            }
+            {/* {
+              (password.length <= 8) ? <p style={{ color: "red" }}>password must be 8 charecter </p> : null
+            } */}
+
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -115,11 +131,10 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-
             >
               Sign In
             </Button>
-            {/* {errorMessage && <div className="error"> {errorMessage} } */}
+          
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -127,7 +142,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

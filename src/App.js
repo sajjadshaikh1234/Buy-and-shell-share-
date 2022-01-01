@@ -2,8 +2,11 @@ import logo from './logo.svg';
 // import './App.css';
 import Shares from './Component/Shares';
 import Increase from './Component/Increase';
-import Signin from './Signin';
-
+import Login from './Login';
+import Testing from './Testing';
+import Register from './Register';
+import { BrowserRouter as Router, Route, Switch, Link, Routes } from 'react-router-dom';
+import Home from './Home';
 
 function App() {
 
@@ -11,7 +14,17 @@ function App() {
     <div>
       <Shares />
       {/* <Increase /> */}
-      <Signin />
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Login /> } />
+          <Route exact path="/register" element={<Register  />} />
+              
+      {/* <Testing /> */}
+
+      </Routes>
+ 
+      </Router>
     </div>
   );
 }

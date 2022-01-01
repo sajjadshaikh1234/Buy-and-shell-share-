@@ -6,7 +6,7 @@ const initialstate = {
 
 function changevalue(state = initialstate, action)  {
     switch (action.type) {
-        case "SIGNIN":
+        case "REGISTER":
             return {
                 ...state,
                 userData: action.payload,
