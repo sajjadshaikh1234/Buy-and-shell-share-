@@ -1,3 +1,7 @@
 export const INCREAMENT  = "INCREAMENT"
 export const DECREAMENT  = "DECREAMENT"
 export const SIGNIN    = "SIGNIN"
+export const GET_PRODUCTS = "GET_PRODUCTS"
+export const POST_PRODUCTS  = "POST_PRODUCTS"
+export const  UPDATE_PRODUCT  = "UPDATE_PRODUCT"
+export const DELETE_PRODUCTS  = "DELETE_PRODUCTS"

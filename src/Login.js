@@ -16,6 +16,8 @@ import { convertLength } from '@mui/material/styles/cssUtils';
 import { useDispatch, useSelector } from "react-redux";
 import { increasenumber, decreasenumber, signin } from './Action/Action'
 import { useNavigate } from 'react-router-dom';
+// import Header from './Header'; 
+
 
 function Copyright(props) {
   return (
@@ -38,10 +40,12 @@ export default function SignIn() {
   const [errorMessage, setErrorMessage] = useState("");
   const [error, setError] = useState("");
   const selector = useSelector((state) => state.changevalue)
-  console.log("selector",selector)
+  // const selctors = useSelector((state) => state.changevalue)
+  // console.log("selector", selector)
   // const dispatch = useDispatch()
   const navigate = useNavigate()
   const changehandler = (e) => {
+    let isLoaggdin = true
     e.preventDefault();
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -49,26 +53,27 @@ export default function SignIn() {
     // console.log("re",re)
     if (!email.match(re)) {
       setErrorMessage({ field: "email", msg: "not valid email" })
-    } 
-     if (!password.match(ps)) {
+      isLoaggdin = false
+    }
+    if (!password.match(ps)) {
       setError({ field: "password", msg: "not valid password" })
+      isLoaggdin = false
     }
 
     // dispatch(signin({ email, password }))
 
     //  dispatch(decreasenumber())
-    if(selector.userData.email === email, selector.userData.password === password ) {
-      console.log("....",selector.userData.email)
-      console.log("......",selector.userData.password)
+    if (selector.userData.email === email, selector.userData.password === password) {
+      console.log("....", selector.userData.email)
+      console.log("......", selector.userData.password)
       navigate("/")
+      isLoaggdin = false
     }
-
-
-
-
   }
 
   return (
+ <div>
+   {/* <Header  /> */}
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -83,6 +88,7 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
+          <h1>welcome {selector.userData. firstname }</h1>
           <Typography component="h1" variant="h5" >
             Sign in
           </Typography>
@@ -134,10 +140,10 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-          
+
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="/forget" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
@@ -152,5 +158,8 @@ export default function SignIn() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+ </div>
+
+   
   );
 }

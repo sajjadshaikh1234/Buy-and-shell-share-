@@ -1,5 +1,5 @@
 
-import  React, { useState } from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,7 +15,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {regis} from "./Action/Action"
+// import { regis } from "./Action/Action"
+
 
 function Copyright(props) {
   return (
@@ -34,20 +35,25 @@ const theme = createTheme();
 
 export default function SignUp() {
 
-  const[firstname,setFirstName]=useState('')
-  const[lastname,setLastName]=useState('')
-  const[email,setEmail]=useState('')
-  const[password,setPassword]=useState('')
-  const[confirmPassword,setConfirmPassword]=useState('')
+  // const[data,setData] = useState([])
+
+
+  const [firstname, setFirstName] = useState('')
+  const [lastname, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [errorMessage1, setErrorMessage1] = useState("")
   const [errorMessage2, setErrorMessage2] = useState("")
   const [errorMessage3, setErrorMessage3] = useState("")
   const [errorMessage4, setErrorMessage4] = useState("")
-const navigate = useNavigate();
-const dispatch = useDispatch()
-const selector = useSelector((state) => state.changevalue)
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const selector = useSelector((state) => state.changevalue)
+
   // const handleSubmit = (event) => {
   //   event.preventDefault();
   //   const data = new FormData(event.currentTarget);
@@ -59,49 +65,81 @@ const selector = useSelector((state) => state.changevalue)
   // }; setErrorMessage2({field2:'firstname',msg2:"not valid firstname"})   
   // setErrorMessage3({field3:'lastname',msg3:"not valid lastname"})
 
-const changeHandler = (e) => {
-  e.preventDefault();
-  if(Valid()){
-    console.log("valid")
-    dispatch(regis({firstname,lastname,email,password}))
-    navigate("/login")
+
+
+  // const handleChange = (e) =>{
+  //   setData( {...data,[e.target.name]:e.target.value})
+  // }
+
+
+  const changeHandler = (e) => {
+    e.preventDefault();
+    if (Valid()) {
+      console.log("valid")
+      // console.log("register",selector)
+      // dispatch(regis({ firstname, lastname, email, password }))
+      navigate("/login")
+      localStorage.setItem("email", email)
+      localStorage.setItem("password", password)
+    }
+    // else {
+    //   navigate("/login")
+    // }
+
+    // 
   }
- 
-// 
-}
-const Valid = () => {
-  let isValid = true
-  const emailv =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const passwordv = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-const namev = /^[a-zA-Z]+ [a-zA-Z]+$/;
+  const Valid = () => {
+    let isValid = true
+    const emailv =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const passwordv = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    const namev = /^[a-zA-Z]+ [a-zA-Z]+$/;
 
 
-if(firstname.length <=4) {
-  setErrorMessage2({field2:'firstname',msg2:"not valid firstname"})  
-  isValid=false
-}
- if(lastname.length <=4) {
-  setErrorMessage3({field3:'lastname',msg3:"not valid lastname"})
-  isValid=false
-}  
- if(!email.match(emailv)) {
-  setErrorMessage({field:'email',msg:"not valid email"})
-  isValid=false
-} 
- 
-if(!confirmPassword) {
-  setErrorMessage4({field4:"confirmpassword" , msg4:"not match password"})
-} else if(confirmPassword !== password ) {
-  setErrorMessage4({field4:"confirmpassword" , msg4:"not match password"})
-  // navigate("/login")
-} 
- if(!password.match(passwordv)) {
-  setErrorMessage1({field1:'password',msg1:"not valid password"})
-  isValid=false
-}
-return isValid
-}
+    if (firstname.length <= 4) {
+      setErrorMessage2({ field2: 'firstname', msg2: "not valid firstname" })
+      isValid = false
+    }
+
+    if (lastname.length <= 4) {
+      setErrorMessage3({ field3: 'lastname', msg3: "not valid lastname" })
+      isValid = false
+    }
+
+    if (!email.match(emailv)) {
+      setErrorMessage({ field: 'email', msg: "not valid email" })
+      isValid = false
+    }
+
+    // if(!confirmPassword) {
+    //   setErrorMessage4({field4:"confirmpassword" , msg4:"not match password"})
+    // } 
+
+    if (!password.match(passwordv)) {
+      setErrorMessage1({ field1: 'password', msg1: "not valid password" })
+      isValid = false
+    }
+
+
+    if (!confirmPassword.match(passwordv)) {
+      setErrorMessage4({ field4: 'password', msg4: "not valid password" })
+      isValid = false
+    }
+
+    if (confirmPassword !== password) {
+      console.log("new", confirmPassword)
+      console.log("pas", password)
+      isValid = false
+      // alert(".........")
+      setErrorMessage4({ field4: "confirmpassword", msg4: "not match password" })
+
+      // navigate("/register")
+      // navigate("/login")
+
+    }
+
+    return isValid
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -133,11 +171,13 @@ return isValid
                   label="First Name"
                   autoFocus
                   value={firstname}
-                  onChange={(e)=>setFirstName(e.target.value)}
-                   error={errorMessage2.field2 === "firstname"}
-                   helperText={errorMessage2.msg2}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  // onChange={(e) => handleChange}
+                  error={errorMessage2.field2 === "firstname"}
+                  helperText={errorMessage2.msg2}
                 />
               </Grid>
+              
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
@@ -147,7 +187,7 @@ return isValid
                   name="lastName"
                   autoComplete="family-name"
                   value={lastname}
-                  onChange={(e)=>setLastName(e.target.value)}
+                  onChange={(e) => setLastName(e.target.value)}
                   error={errorMessage3.field3 === "lastname"}
                   helperText={errorMessage3.msg3}
 
@@ -162,7 +202,7 @@ return isValid
                   name="email"
                   autoComplete="email"
                   value={email}
-                  onChange={(e)=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   error={errorMessage.field === "email"}
                   helperText={errorMessage.msg}
                 />
@@ -177,11 +217,13 @@ return isValid
                   id="password"
                   autoComplete="new-password"
                   value={password}
-                  onChange={(e)=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   error={errorMessage1.field1 === "password"}
                   helperText={errorMessage1.msg1}
+
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
@@ -192,7 +234,7 @@ return isValid
                   id="confirm_password"
                   autoComplete="new-password"
                   value={confirmPassword}
-                  onChange={(e)=>setConfirmPassword(e.target.value)}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   error={errorMessage4.field4 === "confirmpassword"}
                   helperText={errorMessage4.msg4}
                 />
@@ -214,7 +256,7 @@ return isValid
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

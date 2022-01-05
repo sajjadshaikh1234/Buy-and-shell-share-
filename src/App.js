@@ -7,24 +7,33 @@ import Testing from './Testing';
 import Register from './Register';
 import { BrowserRouter as Router, Route, Switch, Link, Routes } from 'react-router-dom';
 import Home from './Home';
+import Forget from './Component/Forgetpassword';
+import Header from './Header'; 
+import { Table } from '@mui/material';
+import Tables from './Jeson/Tables';
+import Posts from '../src/Posts'
+import Updatedetail from  "./Updatedetail"
 
 function App() {
 
   return (
     <div>
-      <Shares />
+      {/* <Shares /> */}
       {/* <Increase /> */}
       <Router>
+      <Header />
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<Home />} /> 
           <Route exact path="/login" element={<Login /> } />
           <Route exact path="/register" element={<Register  />} />
-              
+          <Route exact path="/forget" element={<Forget />} />
+          <Route exact path = "/table" element={<Tables />} />     
+          <Route exact path="/post" element={<Posts />  }  />
+          <Route exact path = "/edit/:id" element={<Updatedetail />} />
       {/* <Testing /> */}
-
       </Routes>
- 
       </Router>
+      
     </div>
   );
 }
